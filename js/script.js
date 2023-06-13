@@ -8,6 +8,8 @@ const optArticleAuthorSelector = '.post-author';
   //optArticleTags = '.data-tags';
   //console.log(optArticleTags);
 
+
+
 const titleClickHandler = function(event){
   event.preventDefault();
   const clickedElement = this;
@@ -99,7 +101,7 @@ function generateTags(){
 
     /* find tags wrapper */
     const tagsList = article.querySelector(optArticleTagsSelector);
-    //console.log('2', tagsList);
+    //console.log('2A', tagsList);
 
     /* make html variable with empty string */
     let html = '';
@@ -132,7 +134,6 @@ function generateTags(){
   /* END LOOP: for every article: */
   }
 }
-
 generateTags();
 
 function tagClickHandler(event){
@@ -194,27 +195,27 @@ addClickListenersToTags()
 
 function generateAuthors(){
   /* find all authors */
-
+  const articles = document.querySelectorAll(optArticleSelector);
+  console.log('1', articles);
   /* START LOOP: for every author: */
-
+  for (let article of articles){
     /* find author wrapper */
-
+    const authorList = article.querySelector(optArticleAuthorSelector);
+    console.log('2', authorList);
     /* make html variable with empty string */
-
-    /* get tags from data-author attribute */
-
-    /* START LOOP: for each author */
-
-      /* generate HTML of the link */
-
-      /* add generated code to html variable */
-
-    /* END LOOP: for each tag */
-
+    let html = '';
+    /* get author from data-author attribute */
+    const articleAuthor = article.getAttribute('data-author');
+    console.log('3', articleAuthor);
+    /* generate HTLM of the link */
+    const linkHTML = '<a href="' + articleAuthor + '">' + articleAuthor + '</a>';
+    console.log('4', linkHTML);
+    /* add generated code to html variable */
+    html = html + linkHTML;
     /* insert HTML of all the links into the tags wrapper */
-
+    authorList.innerHTML = html;
   /* END LOOP: for every article: */
-
+  }
 }
 generateAuthors();
 
