@@ -6,8 +6,8 @@ const optTitleListSelector = '.titles';
 const optArticleTagsSelector = '.post-tags .list';
 const optArticleAuthorSelector = '.post-author';
 const optTagsListSelector = '.tags.list';
-const optCloudClassCount = '5';
-const optCloudClassPrefix = 'tag-size-';
+const optTagsCloudClassCount = '5';
+const optTagsCloudClassPrefix = 'tag-size-';
 const optAuthorListSelector = '.authors.list';
 
 generateTitleLinks();
@@ -85,7 +85,6 @@ function generateTitleLinks(customSelector = ''){
   titleList.innerHTML = html;
   //console.log('7', html);
 
-
 const links = document.querySelectorAll('.titles a');
   //console.log(links);
 
@@ -115,8 +114,8 @@ function calculateTagClass(count, parms){
   const normalizedCount = count - parms.min;
   const normalizedMax = parms.max - parms.min;
   const percentage = normalizedCount / normalizedMax;
-  const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1);
-  return optCloudClassPrefix + classNumber;
+  const classNumber = Math.floor( percentage * (optTagsCloudClassCount - 1) + 1);
+  return optTagsCloudClassPrefix + classNumber;
 }
 
 function generateTags(){
@@ -169,7 +168,6 @@ function generateTags(){
     //console.log('8', tagsList.innerHTML);
   /* END LOOP: for every article: */
   }
-
   /* [NEW] find list of tags in right column */
   const tagList = document.querySelector(optTagsListSelector);
   //console.log(tagList);
@@ -184,10 +182,8 @@ function generateTags(){
     /* [NEW] generate code of a link and add it to allTagsHTML */
     const tagLinkHTML = calculateTagClass(allTags[tag], tagsParams);
     allTagsHTML += '<li><a class="' + tagLinkHTML + '" href="#tag-' + tag + '">' + tag + '</a></li>';
-  }
-
   /* [NEW] END LOOP: for each tag in allTags: */
-
+  }
   /*[NEW] add HTML from allTagsHTML to tagList */
   tagList.innerHTML = allTagsHTML;
   //console.log(allTagsHTML);
@@ -247,7 +243,7 @@ function addClickListenersToTags(){
 
 function generateAuthors(){
   /* [NEW] create a new variable allAuthor with an empty object */
-  let allAuthors = {};
+  const allAuthors = {};
 
   /* find all authors */
   const articles = document.querySelectorAll(optArticleSelector);
